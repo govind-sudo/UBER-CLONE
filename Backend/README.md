@@ -46,14 +46,28 @@ Send a JSON object with the following fields:
 
 ```json
 {
-  "token": "<jwt_token>",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.sampleToken",
   "user": {
-    "_id": "user_id",
+    "_id": "64f2b1c9a1b2c3d4e5f67890",
     "fullname": {
       "firstname": "John",
       "lastname": "Doe"
     },
     "email": "john@example.com"
   }
+}
+```
+
+### Example Error Response
+
+```json
+{
+  "errors": [
+    {
+      "msg": "Invalid Email",
+      "param": "email",
+      "location": "body"
+    }
+  ]
 }
 ```
