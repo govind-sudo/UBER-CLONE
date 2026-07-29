@@ -71,3 +71,74 @@ Send a JSON object with the following fields:
   ]
 }
 ```
+
+## User Login Endpoint
+
+### POST /users/login
+
+Logs in an existing user and returns a JWT token.
+
+### Request Body
+
+Send a JSON object with the following fields:
+
+```json
+{
+  "email": "john@example.com",
+  "password": "123456"
+}
+```
+
+### Required Data
+
+- email: required, must be a valid email address
+- password: required, must be at least 6 characters long
+
+### Response
+
+#### Success
+
+- Status Code: 200 OK
+- Response body includes:
+  - token
+  - user
+
+#### Validation Error
+
+- Status Code: 400 Bad Request
+- Response body includes an errors array with details of validation failures
+
+#### Invalid Credentials
+
+- Status Code: 401 Unauthorized
+- Response body includes an error message indicating invalid email or password
+
+### Example Success Response
+
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.sampleToken",
+  "user": {
+    "_id": "64f2b1c9a1b2c3d4e5f67890",
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "john@example.com"
+  }
+}
+```
+
+### Example Error Response
+
+```json
+{
+  "errors": [
+    {
+      "msg": "Invalid Email",
+      "param": "email",
+      "location": "body"
+    }
+  ]
+}
+```
